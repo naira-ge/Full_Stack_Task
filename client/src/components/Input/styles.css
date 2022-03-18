@@ -1,0 +1,44 @@
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 5%;
+  left: 10px;
+}
+
+.input-container input {
+    width: 100%;
+    height: 100%;
+    font-size: var(--fontSize);
+    color: var(--textColorSecondary);
+    border: 2px solid var(--borderColor);
+    background: var(--white);
+    padding: 10px 5px 10px 40px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+.input-container input:focus {
+    outline: none;
+    color: var(--secondary);
+    border: 2px solid var(--secondary);
+}
+
+.input-container label {
+  font-size: 12px;
+}
+
+.input-container input[type='checkbox'] {
+  width: 14px;
+  height: 14px;
+  background: var(--white);
+  border-radius: 4px;
+  margin: 0 8px;
+  cursor: pointer;
+}

@@ -7,14 +7,14 @@ import {
 } from "react-router-dom";
 
 import Layout from 'components/Layout';
-import Login from 'pages/Login';
+import LogIn from 'pages/Login';
 import Users from 'pages/Users';
 import NotFound from 'pages/NotFound';
 
 import './styles/App.css';
 
 const PrivateRoute = ({ auth }) => {
-  return auth ? <Outlet /> : <Navigate to="/" />;
+  return auth ? <Outlet /> : <Navigate to="/"/>;
 };
 
 function App() {
@@ -22,8 +22,8 @@ function App() {
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Login />} />
-            <Route path="/login" element={<Login />} />
+            <Route index element={<LogIn />} />
+            <Route path="/login" element={<LogIn />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route element={<PrivateRoute auth={true} />}>

@@ -1,22 +1,26 @@
 
 const Users = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src='/logo.svg' className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className='container-users'>
+      <h2>User List</h2>
+      <div className='wrapper-group'>
+        <ul>
+          <li className='group-item'>
+              <div className='item-detail'>
+                <img className='item-img' src='/ok.svg' alt='done' />
+                <span>
+                  <p className='item-info'>John</p>
+                  <p className='user-fullname'>John Doe</p>
+                </span>
+              </div>
+              <span>
+                <p className='item-info'>...</p>
+                <p className='item-info'>John Doe</p>
+              </span>
+          </li>
+        </ul>
+      </div>
+    </section>
   )
 }
 
