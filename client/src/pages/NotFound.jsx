@@ -1,9 +1,11 @@
-
+import Logo from 'components/Logo';
+  
 const NotFound = () => {
   return (
-    <section className='container-login'>
+    <section className='container'>
       <div>
-        404 page not found
+        <Logo />
+        <h3>404 page not found</h3>
       </div>
     </section>
   )

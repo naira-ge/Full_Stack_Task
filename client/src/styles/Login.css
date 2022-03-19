@@ -88,7 +88,7 @@
 
 .form-submit .error-message {
   align-self: center;
-  margin: calc(var(--margin) * 2) auto;
+  margin: calc(var(--margin) * 3);
   color: var(--warning);
   font-weight: 500;
 }

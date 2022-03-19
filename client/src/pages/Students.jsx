@@ -7,11 +7,11 @@ import usePagination from 'hooks/usePagination';
 
 import { appKey } from '../config/constants/appKey';
 
-import '../styles/Users.css';
+import '../styles/Students.css';
 
 const contentByPage = 5;
 
-const Users = () => {
+const Students = () => {
   const navigate = useNavigate();
 
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } =
@@ -34,7 +34,7 @@ const Users = () => {
 
   return (
     <>
-      <section className='container-users'>
+      <section className='container-students'>
         <h2 className='group-title'>User List</h2>
         <div className='wrapper-group'>
           <ul>
@@ -59,4 +59,4 @@ const Users = () => {
   )
 }
 
-export default Users;
+export default Students;

@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+import useFetchData from './../hooks/useFetchData';
+
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 
 import loginFields from '../config/constants/loginFields';
 import { appKey } from '../config/constants/appKey';
+import { POST } from 'config/constants/methods';
 
 import '../styles/Login.css';
 
@@ -15,6 +18,8 @@ const LogIn = () => {
   const [{username, password, remember}, setFields] = useState(() => loginFields);
   const [ loading, setLoading ] = useState( false );
   const [ errorMessage, setErrorMessage ] = useState('');
+
+  const { fetchData: fetchLogin, data, hasError } = useFetchData([]);
   
   const handleChange = ({ target: { name, value } }) =>
     setFields(prevFields => ({
@@ -33,25 +38,20 @@ const LogIn = () => {
     if (username.value && password.value) {
       setLoading( prev => !prev );
       console.log( username,password,remember,loading );
-      
-      if (remember.value) {
-        localStorage.setItem(appKey, JSON.stringify('jwt'));
-      } 
 
-      navigate('/users');
+      await fetchLogin(`https://oauth.greenwaveiot.com/api/login?password=${password.value}&username=${username.value}`, POST);
 
-      // await get(`api/login?password=${password.value}&username=${username.value}`);
-
-      // const { data, error } = await get('api/user');
-
-      // if (!error) {
-      //   // TODO: => remove Bearer from this request
-      //   setLoading(prev => !prev);
-      //   setCredentials({ ...data, accessToken: data.accessToken.split('Bearer').join('').trim() });
-      //   await navigate('/home');
-      // } else {
-      //   setLoading(prev => !prev);
-      // }
+      if (!!hasError && data.length > 0) {
+        if (remember?.value) {
+          localStorage.setItem(appKey, JSON.stringify('jwt'));
+        } 
+        await navigate( '/students' );
+      } else {
+        setErrorMessage('Something went wrong. Try again.');
+      }
+      setLoading(prev => !prev);
+    } else {
+      setErrorMessage('Please fill all fields');
     }
   };
   

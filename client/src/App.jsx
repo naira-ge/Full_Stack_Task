@@ -7,7 +7,7 @@ import {
 import Layout from 'components/Layout';
 import PrivateRoute from 'components/PrivateRoute';
 import LogIn from 'pages/Login';
-import Users from 'pages/Users';
+import Students from 'pages/Students';
 import NotFound from 'pages/NotFound';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route element={<PrivateRoute />}>
-            <Route path="/users" element={<Users />} />
+            <Route path="/students" element={<Students />} />
           </Route>
         </Routes>
     </BrowserRouter>
