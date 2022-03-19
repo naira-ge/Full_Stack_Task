@@ -4,7 +4,7 @@ import { POST, GET, DELETE } from 'config/constants/methods';
 
 const useFetchData = (
   initialData = {},
-  method = POST,
+  method = GET,
 ) => {
   const [data, setData] = useState(initialData);
   const [hasError, setHasError] = useState(false);
@@ -33,10 +33,6 @@ const useFetchData = (
     setIsLoading(false);
     return response;
   },[ hasError,initialData,method ] );
-  
-  useEffect(() => {
-      fetchData();
-  }, [method]);
 
   return { data, fetchData, isLoading, setData, hasError };
 };

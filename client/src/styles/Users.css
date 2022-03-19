@@ -1,0 +1,24 @@
+.container-users {
+  margin: 1rem auto;
+  width: 85%;
+  border-top: 15px solid var(--secondary);
+  box-shadow: var(--lightShadow);
+  margin-top: calc(var(--margin) * 2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper-group {
+  
+}
+
+
+@media screen and (max-width: 900px){
+  .login-wrapper {
+    max-width: 100%;
+    position: relative;
+  }
+}
+

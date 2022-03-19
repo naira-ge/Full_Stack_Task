@@ -11,8 +11,6 @@ import LogIn from 'pages/Login';
 import Users from 'pages/Users';
 import NotFound from 'pages/NotFound';
 
-import './styles/App.css';
-
 const PrivateRoute = ({ auth }) => {
   return auth ? <Outlet /> : <Navigate to="/"/>;
 };

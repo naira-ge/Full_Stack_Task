@@ -5,9 +5,11 @@ import Input from 'components/Input';
 
 import loginFields from '../config/constants/loginFields';
 
+import '../styles/Login.css';
+
 const LogIn = () => {
   const [{username, password, remember}, setFields] = useState(() => loginFields);
-  const [ loading,setLoading ] = useState( false );
+  const [ loading, setLoading ] = useState( false );
   const [ errorMessage, setErrorMessage ] = useState('');
   
   const handleChange = ({ target: { name, value } }) =>
