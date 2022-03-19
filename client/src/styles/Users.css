@@ -1,24 +1,43 @@
 .container-users {
   margin: 1rem auto;
-  width: 85%;
-  border-top: 15px solid var(--secondary);
-  box-shadow: var(--lightShadow);
-  margin-top: calc(var(--margin) * 2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+
+.group-title {
+  color: var(--textColorPrimary);
+  font-weight: 500;
 }
 
 .wrapper-group {
-  
+  width: 85vw;
+  border-top: 15px solid var(--secondary);
+  box-shadow: var(--lightShadow);
+  margin-top: calc(var(--margin) * 2);
 }
 
-
-@media screen and (max-width: 900px){
-  .login-wrapper {
-    max-width: 100%;
-    position: relative;
-  }
+.btn-logout {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: var(--bgColorSecondary);
+  color: var(--textColorPrimary);
+  padding: calc(var(--padding) * 2);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
+.btn-logout:hover {
+  background: var(--secondary);
+}
+
+.item-logout {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}

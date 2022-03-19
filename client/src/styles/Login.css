@@ -3,13 +3,17 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  -ms-transform: translate(-50%, 50%);
-  transform: translate(-50%, 50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.wrapper-form {
   max-width: var(--max-width);
 }
 
 .wrapper-intro {
   padding: calc(var(--padding) * 2);
+  margin-top: calc(var(--margin) * 7);
 }
 
 .wrapper-intro h4 {
@@ -25,7 +29,7 @@
 }
 
 .form-submit {
-  margin: calc(var(--margin) * 5) auto;
+  margin: calc(var(--margin) * 6) auto;
 }
 
 .submit-btn {
@@ -35,12 +39,12 @@
   justify-content: space-between;
   align-items: center;
   padding: calc(var(--padding) * 1.5);
-  margin-top: calc(var(--margin) * 5);
-  background: var(--bgButton);
+  margin-top: calc(var(--margin) * 8);
+  background: var(--secondary);
   outline: none;
   border: none;
   border-radius: var(--radius);
-  color: var(--textColorPrimary);
+  color: var(--white);
   font-size: var(--fontSize);
   font-weight: 600;
   box-shadow: var(--dark-shadow);
@@ -54,25 +58,52 @@
 }
 
 .submit-btn:hover {
-  background: var(--secondary);
+  background: var(--bgButton);
+  color: var(--white);
+}
+
+.submit-btn-loading {
+  cursor: pointer;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--padding) * 1.5);
+  margin-top: calc(var(--margin) * 8);
+  background: var(--bgButtonLoading);
+  color: var(--textColorPrimary);
+  outline: none;
+  border: none;
+  border-radius: var(--radius);
+  font-size: var(--fontSize);
+  font-weight: 600;
+  box-shadow: var(--dark-shadow);
+  transition: var(--transition);
+}
+
+.submit-btn-loading:hover {
+  background: var(--bgButton);
   color: var(--white);
 }
 
 .form-submit .error-message {
   align-self: center;
-  margin: var(--margin) auto;
+  margin: calc(var(--margin) * 2) auto;
   color: var(--warning);
   font-weight: 500;
 }
 
 @media screen and (max-width: 900px){
   .container-login {
-    max-width: 100%;
-    top: 0;
+    top: 50%;
     left: 0;
-    -ms-transform: translate(0, 50%);
-    transform: translate(0, 50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
     padding: calc(var(--padding) * 2);
+  }
+
+  .wrapper-form {
+    max-width: 100%;
   }
 }
 

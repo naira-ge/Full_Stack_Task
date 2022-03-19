@@ -1,13 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 
 import loginFields from '../config/constants/loginFields';
+import { appKey } from '../config/constants/appKey';
 
 import '../styles/Login.css';
 
 const LogIn = () => {
+  const navigate = useNavigate();
+
   const [{username, password, remember}, setFields] = useState(() => loginFields);
   const [ loading, setLoading ] = useState( false );
   const [ errorMessage, setErrorMessage ] = useState('');
@@ -28,7 +32,13 @@ const LogIn = () => {
     e.preventDefault();
     if (username.value && password.value) {
       setLoading( prev => !prev );
-      console.log(username, password, remember);
+      console.log( username,password,remember,loading );
+      
+      if (remember.value) {
+        localStorage.setItem(appKey, JSON.stringify('jwt'));
+      } 
+
+      navigate('/users');
 
       // await get(`api/login?password=${password.value}&username=${username.value}`);
 
@@ -47,7 +57,7 @@ const LogIn = () => {
   
   return (
     <section className='container-login'>
-      <div>
+      <div className='wrapper-form'>
         <Logo />
         <div className='wrapper-intro'>
           <h4>Welcome to the Learning Management System</h4>
@@ -78,9 +88,9 @@ const LogIn = () => {
                 checked={remember.value}
                 onChange={handleCheckboxChange}
               />
-              <button className='submit-btn' onClick={handleLoginSubmit}>
-                Log In {loading && '...'}
-                <img alt='submit-icon' className='submit-img' src='/go.svg'/>
+              <button className={loading ? 'submit-btn-loading' : 'submit-btn'} onClick={handleLoginSubmit}>
+                Log In
+                <img alt='submit-icon' className='submit-img' src='/arrow-right.svg'/>
               </button>
               <p className='error-message'>{ errorMessage }</p>
             </form>

@@ -31,6 +31,8 @@ h4 {
 
 ul {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -42,10 +44,12 @@ a {
   --primary: #F6F6F6;
   --secondary: #E98C3B;
   --bgColor: #F6F6F5;
-  --bgButton: #808080;
+  --bgColorSecondary: #EBEBEB;
+  --bgButton: #fc7601;
+  --bgButtonLoading: #888787;
   --warning: #ff0000;
   --white: #ffffff;
-  --textColorPrimary: #070707;
+  --textColorPrimary: #444343;
   --textColorSecondary: #a3a3a3;
   --borderColor: #a9a9a9;
   --inputColor: #757474;

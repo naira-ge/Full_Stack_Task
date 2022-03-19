@@ -2,15 +2,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--padding) calc(var(--padding) * 5);
+  margin: 0;
+  padding: calc(var(--padding) * 3) calc(var(--margin) * 20);
 }
 
 .group-item:nth-child(even) {
-    background: #c5c5c5;
-  }
+  background: var(--bgColorSecondary);
+}
+
+.item-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .item-detail .item-img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   margin-right: 30px;
+}
+
+.item-info {
+  font-size: var(--fontSize);
+  color: var(--textColorPrimary);
+}
+
+.item-name {
+  font-size: var(--fontSize);
+  color: var(--textColorSecondary);
+  text-transform: capitalize;
 }

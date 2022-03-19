@@ -1,19 +1,14 @@
 import {
   Routes,
   Route,
-  BrowserRouter,
-  Navigate,
-  Outlet,
+  BrowserRouter
 } from "react-router-dom";
 
 import Layout from 'components/Layout';
+import PrivateRoute from 'components/PrivateRoute';
 import LogIn from 'pages/Login';
 import Users from 'pages/Users';
 import NotFound from 'pages/NotFound';
-
-const PrivateRoute = ({ auth }) => {
-  return auth ? <Outlet /> : <Navigate to="/"/>;
-};
 
 function App() {
   return (
@@ -24,7 +19,7 @@ function App() {
             <Route path="/login" element={<LogIn />} />
             <Route path="*" element={<NotFound />} />
           </Route>
-          <Route element={<PrivateRoute auth={true} />}>
+          <Route element={<PrivateRoute />}>
             <Route path="/users" element={<Users />} />
           </Route>
         </Routes>
