@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
+  gap: calc(var(--margin)/2);
   margin: calc(var(--margin) * 4) 0;
 }
 
@@ -13,17 +13,22 @@
   border-radius: 0;
 }
 
-.page {
+.page, .next-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 20px;
   font-weight: bold;
   background-color: transparent;
-  border-radius: 3px;
   color: var(--textColorSecondary);
   border-bottom: 2px solid transparent;
+}
+
+.next-page {
+  margin-left: var(--margin);
+  width: 25px;
+  height: 20px;
 }
 
 .page.active {

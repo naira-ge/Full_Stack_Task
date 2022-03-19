@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 0;
-  padding: calc(var(--padding) * 3) calc(var(--margin) * 20);
+  padding: calc(var(--padding) * 3) calc(var(--padding) * 17);
 }
 
 .group-item:nth-child(even) {
@@ -17,8 +17,8 @@
 }
 
 .item-detail .item-img {
-  width: 25px;
-  height: 25px;
+  width: 21px;
+  height: 21px;
   margin-right: 30px;
 }
 
@@ -31,4 +31,10 @@
   font-size: var(--fontSize);
   color: var(--textColorSecondary);
   text-transform: capitalize;
+}
+
+@media screen and (max-width: 900px){
+  .group-item {
+    padding: calc(var(--padding) * 3) calc(var(--padding) * 4);
+  }
 }

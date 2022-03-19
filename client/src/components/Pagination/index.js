@@ -25,9 +25,9 @@ const Pagination = ({
       )}
       <button
         onClick={page === totalPages && getNextPage ? () => getNextPage() : nextPage}
-        className={`page ${page === totalPages && !getNextPage && 'disabled'}`}
+        className={`next-page ${page === totalPages && !getNextPage && 'disabled'}`}
       >
-        Next
+        Next&raquo;
       </button>
     </div>
   )
