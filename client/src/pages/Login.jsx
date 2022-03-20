@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import useFetchData from './../hooks/useFetchData';
+import useFetchData from 'hooks/useFetchData';
 
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 
-import loginFields from '../config/constants/loginFields';
-import { appKey } from '../config/constants/appKey';
+import { setToken } from 'utils/token';
+import loginFields from 'config/constants/loginFields';
 import { POST } from 'config/constants/methods';
 
 import '../styles/Login.css';
@@ -21,14 +21,16 @@ const LogIn = () => {
 
   const { fetchData: fetchLogin, data, hasError } = useFetchData([]);
   
-  const handleChange = ({ target: { name, value } }) =>
-    setFields(prevFields => ({
+  const handleChange = ( { target: { name,value } } ) => {
+    errorMessage && setErrorMessage('');
+    setFields( prevFields => ( {
       ...prevFields,
       [name]: {
         ...prevFields[name],
         value,
       },
-    } ) );
+    }));
+  };
     
   const handleCheckboxChange = ({ target: { name } }) =>
     setFields( prev => ( { ...prev,[ name ]: { ...prev[ name ],value: !prev[ name ].value } } ) );
@@ -43,9 +45,9 @@ const LogIn = () => {
 
       if (!!hasError && data.length > 0) {
         if (remember?.value) {
-          localStorage.setItem(appKey, JSON.stringify('jwt'));
+          setToken('jwt');
         } 
-        await navigate( '/students' );
+        await navigate('/students');
       } else {
         setErrorMessage('Something went wrong. Try again.');
       }

@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import Info from 'components/Info';
 import Pagination from 'components/Pagination';
 
 import usePagination from 'hooks/usePagination';
-
-import { appKey } from '../config/constants/appKey';
+import useFetchData from 'hooks/useFetchData';
+import { removeToken } from 'utils/token';
 
 import '../styles/Students.css';
 
@@ -13,20 +14,28 @@ const contentByPage = 5;
 
 const Students = () => {
   const navigate = useNavigate();
+  const { isLoading, fetchData: fetchStudent, data } = useFetchData([]);
 
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } =
     usePagination({
       contentPerPage: contentByPage,
-      count: 15,
-      // count: data?.length,
+      count: data?.length,
     });
+  
+  useEffect( () => {
+    let isMounted = true;
+
+    if(isMounted) {
+      fetchStudent( `http://localhost:3001/students` );
+    }
+    return () => { isMounted = false; };
+
+  }, []);
 
   const handleLogout = () => {
-    if( localStorage.getItem(appKey)) {
-      localStorage.clear();
-      navigate('/');
-    }
-  }
+    removeToken();
+    navigate( '/' );
+  };
 
   const handleGetPage = () => {
 
@@ -38,8 +47,10 @@ const Students = () => {
         <h2 className='group-title'>User List</h2>
         <div className='wrapper-group'>
           <ul>
-            <Info />
-            <Info />
+            {isLoading ? <p className='loading'>Loading...</p> :
+            (data.length > 0 ? 
+              data?.map(({id, user_id, name, group}) => (<Info key={id} info={{user_id, name, group}}/>)) : 
+              <p className='loading'>No data to show yet</p>)}
           </ul>
         </div>
         <Pagination

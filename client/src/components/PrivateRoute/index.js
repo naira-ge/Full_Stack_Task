@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from "react-router-dom";
 
 import Layout from 'components/Layout';
-import { appKey } from './../../config/constants/appKey';
+
+import { getToken } from 'utils/token';
 
 const PrivateRoute = () => {
   const [auth, setAuth] = useState( false );
   
-    useEffect(() => {
-    localStorage.getItem(appKey) ? setAuth(true) : setAuth(false);
+  useEffect( () => {
+    const token = getToken();
+    token ? setAuth(true) : setAuth(false);
     },[auth]);
 
   return (

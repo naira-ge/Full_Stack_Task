@@ -1,12 +1,14 @@
 import './styles.css';
 
-const Info = ({info, name, group}) => {
+const Info = (studentInfo) => {
+  const {user_id, name, group} = studentInfo.info;
+
   return (
     <li className='group-item'>
         <div className='item-detail'>
           <img className='item-img' src='/done.svg' alt='done' />
           <span>
-            <p className='item-info'>{info}</p>
+            <p className='item-info'>{user_id}</p>
             <p className='item-name'>{name}</p>
           </span>
         </div>

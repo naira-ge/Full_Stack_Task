@@ -1,24 +1,29 @@
 module.exports = (sequelize, DataTypes) => {
-  const Students = sequelize.define("Students",{
+  const Users = sequelize.define( "api_users",{
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
     },
-    user_id: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
-      key: true,
     },
-    name: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
-    }, 
-    group: {
+    },
+    token: {
       type: DataTypes.STRING,
-      allowNull: false,
-    }
+      allowNull: true,
+    },
   });
 
-  return Students;
-}
+  // Users.associate = (models) => {
+  //   Users.hasMany(models.Likes, {
+  //     onDelete: "cascade",
+  //   });
+  // };
+
+  return Users;
+};
