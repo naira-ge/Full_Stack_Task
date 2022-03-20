@@ -5,7 +5,6 @@ const Pagination = ({
   prevPage,
   page,
   setPage,
-  getNextPage,
   totalPages,
 }) => {
   return (
@@ -24,8 +23,8 @@ const Pagination = ({
         <button className="page"> 0 </button>
       )}
       <button
-        onClick={page === totalPages && getNextPage ? () => getNextPage() : nextPage}
-        className={`next-page ${page === totalPages && !getNextPage && 'disabled'}`}
+        onClick={page === totalPages && nextPage}
+        className={`next-page ${page === totalPages && 'disabled'}`}
       >
         Next&raquo;
       </button>

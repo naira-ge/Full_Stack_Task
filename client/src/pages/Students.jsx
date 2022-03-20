@@ -25,9 +25,9 @@ const Students = () => {
     let isMounted = true;
 
     if(isMounted && page) {
-      fetchStudent( `http://localhost:3001/students?page=${page-1}` );
+      fetchStudent( `http://localhost:3001/students?page=${page-1}&size=5` );
     }
-    
+
     //cleanup 
     return () => { isMounted = false; };
   }, [page]);
@@ -36,10 +36,6 @@ const Students = () => {
     removeToken();
     navigate( '/' );
   };
-
-  const handleGetPage = () => {
-
-  }
 
   return (
     <>
@@ -60,7 +56,7 @@ const Students = () => {
             page={page}
             setPage={setPage}
             totalPages={totalPages}
-            getNextPage={handleGetPage}/>
+            />
       </section>
       <button className='btn-logout' onClick={handleLogout}>
         <img className='item-logout' src='/log-out.svg' alt='logout'/>
