@@ -14,7 +14,7 @@ const contentByPage = 5;
 
 const Students = () => {
   const navigate = useNavigate();
-  const { isLoading, fetchData: fetchStudent, data } = useFetchData([]);
+  const { isLoading, fetchData: fetchStudent, data, hasError } = useFetchData([]);
 
   const { nextPage, prevPage, page, setPage, totalPages } = usePagination({
       contentPerPage: contentByPage,
@@ -43,20 +43,23 @@ const Students = () => {
         <h2 className='group-title'>User List</h2>
         <div className='wrapper-group'>
           <ul>
-            {isLoading ? <p className='loading'>Loading...</p> :
-            (data?.content?.length > 0 ? 
-              data?.content?.map(({id, user_id, name, group}) => (<Info key={id} info={{user_id, name, group}}/>)) : 
-              <p className='loading'>No data to show yet</p>)}
+            {isLoading && <p className='info'>Loading...</p>}
+            {hasError && <p className='info'>Something went wrong, try again.</p>}
+            {(data?.content && data?.content?.length === 0) ?
+              <p className='info'>No students to show.</p> :
+              data?.content?.map( ( { id,user_id,name,group } ) => (
+                <Info key={id} info={{ user_id,name,group }} />
+            ))} 
           </ul>
         </div>
         <Pagination
-            contentPerPage={contentByPage}
-            nextPage={nextPage}
-            prevPage={prevPage}
-            page={page}
-            setPage={setPage}
-            totalPages={totalPages}
-            />
+          contentPerPage={contentByPage}
+          nextPage={nextPage}
+          prevPage={prevPage}
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
+          />
       </section>
       <button className='btn-logout' onClick={handleLogout}>
         <img className='item-logout' src='/log-out.svg' alt='logout'/>

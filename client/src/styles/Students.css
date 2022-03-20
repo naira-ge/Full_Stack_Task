@@ -42,7 +42,7 @@
   margin-right: var(--margin);
 }
 
-.loading {
-  padding: calc(var(--padding) * 2);
+.info {
+  padding: calc(var(--padding) * 3);
   font-size: var(--fontSize);
 }
