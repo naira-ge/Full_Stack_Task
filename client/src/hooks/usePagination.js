@@ -3,8 +3,6 @@ const usePagination = ({ contentPerPage, count }) => {
   const [page, setPage] = useState(1);
 
   const pageCount = Math.ceil(count / contentPerPage);
-  const lastContentIndex = page * contentPerPage;
-  const firstContentIndex = lastContentIndex - contentPerPage;
 
   const changePage = (next) => {
     setPage(state => {
@@ -21,7 +19,7 @@ const usePagination = ({ contentPerPage, count }) => {
     });
   };
 
-  const setPageSAFE = (num) => {
+  const setPageSafe = (num) => {
     if (num > pageCount) {
       setPage(pageCount);
     } else if (num < 1) {
@@ -35,9 +33,7 @@ const usePagination = ({ contentPerPage, count }) => {
     totalPages: pageCount,
     nextPage: () => changePage(true),
     prevPage: () => changePage(false),
-    setPage: setPageSAFE,
-    firstContentIndex,
-    lastContentIndex,
+    setPage: setPageSafe,
     page,
   };
 };

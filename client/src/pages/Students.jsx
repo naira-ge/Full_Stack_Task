@@ -16,21 +16,21 @@ const Students = () => {
   const navigate = useNavigate();
   const { isLoading, fetchData: fetchStudent, data } = useFetchData([]);
 
-  const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } =
-    usePagination({
+  const { nextPage, prevPage, page, setPage, totalPages } = usePagination({
       contentPerPage: contentByPage,
-      count: data?.length,
+      count: data?.totalElements,
     });
   
-  useEffect( () => {
+  useEffect(() => {
     let isMounted = true;
 
-    if(isMounted) {
-      fetchStudent( `http://localhost:3001/students` );
+    if(isMounted && page) {
+      fetchStudent( `http://localhost:3001/students?page=${page-1}` );
     }
+    
+    //cleanup 
     return () => { isMounted = false; };
-
-  }, []);
+  }, [page]);
 
   const handleLogout = () => {
     removeToken();
@@ -48,8 +48,8 @@ const Students = () => {
         <div className='wrapper-group'>
           <ul>
             {isLoading ? <p className='loading'>Loading...</p> :
-            (data.length > 0 ? 
-              data?.map(({id, user_id, name, group}) => (<Info key={id} info={{user_id, name, group}}/>)) : 
+            (data?.content?.length > 0 ? 
+              data?.content?.map(({id, user_id, name, group}) => (<Info key={id} info={{user_id, name, group}}/>)) : 
               <p className='loading'>No data to show yet</p>)}
           </ul>
         </div>
