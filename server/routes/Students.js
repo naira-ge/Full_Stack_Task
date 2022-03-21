@@ -8,12 +8,12 @@ router.get('/', validateToken, async (req, res) => {
   const sizeAsNumber = Number.parseInt(req.query.size);
   
   let page = 0;
-  if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+  if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
     page = pageAsNumber;
   }
 
   let size = 5;
-  if(!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 5) {
+  if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 5) {
     size = sizeAsNumber;
   }
 
@@ -22,7 +22,7 @@ router.get('/', validateToken, async (req, res) => {
     offset: page * size,
   });
   
-  if( !listOfStudents ) {
+  if (!listOfStudents) {
     res.status( 404 ).json({ error: "No data to show" });
   } else {
     res.status( 200 ).json({

@@ -1,8 +1,8 @@
-import { useState,useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import { getToken } from 'utils/token';
 
-import {GET} from 'config/constants/methods';
+import { GET } from 'config/constants/methods';
 
 const useFetchData = (
   initialData = {},
@@ -30,8 +30,8 @@ const useFetchData = (
 
       const responseData = await response.json();
       
-      if( response.ok ) {
-        setData( responseData );
+      if (response.ok) {
+        setData(responseData);
         return responseData;
       } else {
         responseData?.error && setHasError(responseData.error)

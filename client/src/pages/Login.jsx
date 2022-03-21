@@ -41,7 +41,7 @@ const LogIn = () => {
     if (username.value && password.value) {
       const response = await fetchLogin(`${appUrl}/auth/login`, POST, {password: `${password.value}`, username: `${username.value}`});
       
-      if(response) {
+      if (response) {
         await setToken( response?.token, remember?.value );
         const token = await getToken();
         token &&  await navigate( "/students" );

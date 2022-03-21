@@ -27,7 +27,7 @@ const Students = () => {
   useEffect(() => {
     let isMounted = true;
 
-    if(isMounted && page) {
+    if (isMounted && page) {
       fetchStudent( `${appUrl}/users?page=${Number(page-1)}&size=${contentByPage}` );
     }
 
