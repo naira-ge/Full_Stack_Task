@@ -6,7 +6,7 @@ import useFetchData from "hooks/useFetchData";
 import Logo from "components/Logo";
 import Input from "components/Input";
 
-import { setToken } from "utils/token";
+import { setToken, getToken } from "utils/token";
 import loginFields from "config/constants/loginFields";
 import { POST } from "config/constants/methods";
 import { appUrl } from "config/constants/appUrl";
@@ -18,7 +18,7 @@ const LogIn = () => {
 
   const [{username, password, remember}, setFields] = useState(() => loginFields);
   const [ errorMessage, setErrorMessage ] = useState("");
-  const { isLoading, fetchData: fetchLogin, data, hasError } = useFetchData({});
+  const { isLoading, fetchData: fetchLogin, hasError } = useFetchData({});
   
   const handleChange = ({ target: { name,value }}) => {
     errorMessage && setErrorMessage("");
@@ -39,13 +39,12 @@ const LogIn = () => {
     errorMessage && setErrorMessage("");
     
     if (username.value && password.value) {
-      console.log( username,password,remember );
-
-      await fetchLogin(`${appUrl}/auth/login`, POST, {password: `${password.value}`, username: `${username.value}`});
+      const response = await fetchLogin(`${appUrl}/auth/login`, POST, {password: `${password.value}`, username: `${username.value}`});
       
-      if(data && !hasError) {
-        await setToken(data?.token, remember?.value);
-        await navigate("/students");
+      if(response) {
+        await setToken( response?.token, remember?.value );
+        const token = await getToken();
+        token &&  await navigate( "/students" );
       } else {
         setErrorMessage(hasError || "Something went wrong. Try again.");
       }

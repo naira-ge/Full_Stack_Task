@@ -40,6 +40,10 @@ router.post("/login", async (req, res) => {
     res.status(200).json({ token: accessToken, username: username, id: user.id });
   })
   .catch(err => res.status(404).json({error: "Username Or Password Incorrect"}));
+} );
+
+router.delete("/logout", validateToken, (req, res) => {
+  res.json("LOGOUT");
 });
 
 router.get("/auth", validateToken, (req, res) => {

@@ -7,7 +7,8 @@ import Pagination from "components/Pagination";
 import usePagination from "hooks/usePagination";
 import useFetchData from "hooks/useFetchData";
 import { removeToken } from "utils/token";
-import {appUrl} from "config/constants/appUrl";
+import { appUrl } from "config/constants/appUrl";
+import { DELETE } from 'config/constants/methods';
 
 import "../styles/Students.css";
 
@@ -15,7 +16,8 @@ const contentByPage = 5;
 
 const Students = () => {
   const navigate = useNavigate();
-  const { isLoading, fetchData: fetchStudent, data, hasError } = useFetchData([]);
+  const { isLoading, fetchData: fetchStudent, data,  hasError } = useFetchData( [] );
+  const { fetchData: fetchLogout } = useFetchData();
 
   const { nextPage, prevPage, page, setPage, totalPages } = usePagination({
       contentPerPage: contentByPage,
@@ -33,9 +35,10 @@ const Students = () => {
     return () => { isMounted = false; };
   }, [page]);
 
-  const handleLogout = () => {
-    removeToken();
-    navigate( "/" );
+  const handleLogout = async () => {
+    await fetchLogout(`${appUrl}/auth/logout`, DELETE);
+    await removeToken();
+    await navigate( "/" );
   };
 
   return (

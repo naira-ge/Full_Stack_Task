@@ -29,10 +29,10 @@ const useFetchData = (
       });
 
       const responseData = await response.json();
-      console.log('responseData', responseData);
-    
+      
       if( response.ok ) {
         setData( responseData );
+        return responseData;
       } else {
         responseData?.error && setHasError(responseData.error)
       }

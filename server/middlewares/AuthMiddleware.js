@@ -11,7 +11,7 @@ const validateToken = (req, res, next) => {
     if (validToken) {
       return next();
     }
-  } catch (err) {
+  } catch (error) {
     return res.json({ error: "You have not to access this information" });
   }
 };
