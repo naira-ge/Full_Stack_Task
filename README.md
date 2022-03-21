@@ -1,6 +1,8 @@
-# Full_Stack_Task
+# Full Stack Task
 App have two parts frontend and backend.
-## Available Scripts
+
+### Frontend app use React.js and backend app use Express.js, Sequelize ORM
+### Available Scripts
 
 In the project directories, you can run:
 
@@ -11,7 +13,8 @@ Runs the frontend app in the [http://localhost:3000](http://localhost:3000) and 
 ### Login user credentials
 
 Use this credentials for login the app.
-### `username: DenSmith, password: password1523`
+#### username: DenSmith, 
+#### password: password1523 
 
 ### Deployment
 
