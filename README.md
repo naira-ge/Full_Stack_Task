@@ -16,4 +16,4 @@ Use this credentials for login the app.
 #### username: DenSmith, 
 #### password: password1523 
 
-<a href="https://gyazo.com/7b61ef8cb5e0ab6c96d283f6896b47e6" rel="project">![Foo](https://gyazo.com/7b61ef8cb5e0ab6c96d283f6896b47e6)</a>
+<a href="https://gyazo.com/7b61ef8cb5e0ab6c96d283f6896b47e6" rel="project">![link](https://gyazo.com/7b61ef8cb5e0ab6c96d283f6896b47e6)</a>
