@@ -1,28 +1,27 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import useFetchData from 'hooks/useFetchData';
+import useFetchData from "hooks/useFetchData";
 
-import Logo from 'components/Logo';
-import Input from 'components/Input';
+import Logo from "components/Logo";
+import Input from "components/Input";
 
-import { setToken } from 'utils/token';
-import loginFields from 'config/constants/loginFields';
-import { POST } from 'config/constants/methods';
+import { setToken } from "utils/token";
+import loginFields from "config/constants/loginFields";
+import { POST } from "config/constants/methods";
+import { appUrl } from "config/constants/appUrl";
 
-import '../styles/Login.css';
+import "../styles/Login.css";
 
 const LogIn = () => {
   const navigate = useNavigate();
 
   const [{username, password, remember}, setFields] = useState(() => loginFields);
-  const [ loading, setLoading ] = useState( false );
-  const [ errorMessage, setErrorMessage ] = useState('');
-
-  const { fetchData: fetchLogin, data, hasError } = useFetchData([]);
+  const [ errorMessage, setErrorMessage ] = useState("");
+  const { isLoading, fetchData: fetchLogin, data, hasError } = useFetchData({});
   
-  const handleChange = ( { target: { name,value } } ) => {
-    errorMessage && setErrorMessage('');
+  const handleChange = ({ target: { name,value }}) => {
+    errorMessage && setErrorMessage("");
     setFields( prevFields => ( {
       ...prevFields,
       [name]: {
@@ -33,68 +32,71 @@ const LogIn = () => {
   };
     
   const handleCheckboxChange = ({ target: { name } }) =>
-    setFields( prev => ( { ...prev,[ name ]: { ...prev[ name ],value: !prev[ name ].value } } ) );
+    setFields(prev => ({...prev,[ name ]: {...prev[ name ], value: !prev[ name ].value}}));
   
   const handleLoginSubmit = async e => {
     e.preventDefault();
+    errorMessage && setErrorMessage("");
+    
     if (username.value && password.value) {
-      setLoading( prev => !prev );
-      console.log( username,password,remember,loading );
+      console.log( username,password,remember );
+      const rememberMe = remember?.value;
 
-      await fetchLogin(`https://oauth.greenwaveiot.com/api/login?password=${password.value}&username=${username.value}`, POST);
-
-      if (!!hasError && data.length > 0) {
-        if (remember?.value) {
-          setToken('jwt');
-        } 
-        await navigate('/students');
+      await fetchLogin(`${appUrl}/auth/login`, POST, {password: `${password.value}`, username: `${username.value}`});
+      await console.log( data );
+      
+      if(data && !hasError) {
+        await setToken(data?.token);
+        // await navigate("/students");
       } else {
-        setErrorMessage('Something went wrong. Try again.');
+        setErrorMessage(hasError || "Something went wrong. Try again.");
       }
-      setLoading(prev => !prev);
     } else {
-      setErrorMessage('Please fill all fields');
+      setErrorMessage("Please fill all fields");
     }
   };
   
   return (
-    <section className='container-login'>
-      <div className='wrapper-form'>
+    <section className="container-login">
+      <div className="wrapper-form">
         <Logo />
-        <div className='wrapper-intro'>
+        <div className="wrapper-intro">
           <h4>Welcome to the Learning Management System</h4>
           <p>Please login to continue</p>
-            <form action='submit' className='form-submit'>
+            <form action="submit" className="form-submit">
               <Input
-                icon='/user.svg'
-                placeholder='Username'
-                name='username'
+                icon="/user.svg"
+                placeholder="Username"
+                name="username"
                 value={username.value}
                 error={username.error}
                 onChange={handleChange}
                 autoFocus
               />
               <Input
-                icon='/password.svg'
-                placeholder='Password'
-                name='password'
-                type='password'
+                icon="/password.svg"
+                placeholder="Password"
+                name="password"
+                type="password"
                 value={password.value}
                 error={password.error}
                 onChange={handleChange}
               />
               <Input
-                label='Remember Me'
-                name='remember'
-                type='checkbox'
+                label="Remember Me"
+                name="remember"
+                type="checkbox"
                 checked={remember.value}
                 onChange={handleCheckboxChange}
               />
-              <button className={loading ? 'submit-btn-loading' : 'submit-btn'} onClick={handleLoginSubmit}>
+              <button
+                className={isLoading ? "submit-btn-loading" : "submit-btn"}
+                onClick={handleLoginSubmit}
+              >
                 Log In
-                <img alt='submit-icon' className='submit-img' src='/arrow-right.svg'/>
+                <img alt="submit-icon" className="submit-img" src="/arrow-right.svg"/>
               </button>
-              <p className='error-message'>{ errorMessage }</p>
+              <p className="error-message">{ errorMessage }</p>
             </form>
         </div>
       </div>

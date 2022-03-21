@@ -1,24 +1,44 @@
 const express = require("express");
 const router = express.Router();
-const { Users } = require("../models");
+const { Users } = require( "../models" );
+const bcrypt = require("bcrypt");
+const uid = require("../utils/uid");
+const { sign } = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
-  const { username, password } = req.body;
-  // bcrypt.hash(password, 10).then((hash) => {
-  //   Users.create({
-  //     username: username,
-  //     password: hash,
-  //   });
-  //   res.json("SUCCESS");
-  // });
+  const {id, username, password } = req.body;
+  bcrypt.hash(password, 10)
+  .then((hash) => {
+    Users.create({
+      id: id || uid(),
+      username: username,
+      password: hash,
+    });
+    res.status(200).json("SUCCESS");
+  })
+  .catch( err => {
+    console.error( err )
+    res.status(404).json({error: "Registration error"});
+  });
 });
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
   const user = await Users?.findOne({ where: { username: username } });
 
-  if (!user) res.json({ error: "User Doesn't Exist" });
+  if (!user) res.status(404).json({ error: "User Doesn't Exist" });
+
+  bcrypt.compare(password, user.password)
+  .then(async (match) => {
+    if (!match) res.status(409).json({ error: "Wrong Username And Password Combination" });
+
+    const accessToken = sign(
+      { username: user.username, id: user.id },
+      "importantsecret"
+    );
+    res.status(200).json({ token: accessToken, username: username, id: user.id });
+  })
+  .catch(err => res.status(404).json({error: "Username Or Password Incorrect"}));
 });
 
 module.exports = router;

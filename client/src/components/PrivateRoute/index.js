@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-import Layout from 'components/Layout';
+import Layout from "components/Layout";
 
-import { getToken } from 'utils/token';
+import { getToken } from "utils/token";
 
 const PrivateRoute = () => {
   const [auth, setAuth] = useState( false );
@@ -15,7 +15,7 @@ const PrivateRoute = () => {
 
   return (
     <Layout>
-      {auth ? <Outlet /> : <Navigate to='/' />}
+      {auth ? <Outlet /> : <Navigate to="/" />}
     </Layout>
   );
 };

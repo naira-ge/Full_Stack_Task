@@ -1,4 +1,4 @@
-import './styles.css';
+import "./styles.css";
 
 const Pagination = ({
   nextPage,
@@ -8,13 +8,13 @@ const Pagination = ({
   totalPages,
 }) => {
   return (
-    <div className='wrapper-pagination'>
+    <div className="wrapper-pagination">
       {totalPages ? (
         [...Array(totalPages).keys()].map(el => (
           <button
             onClick={() => setPage(el + 1)}
             key={el}
-            className={`page ${page === el + 1 ? 'active' : ''}`}
+            className={`page ${page === el + 1 ? "active" : ""}`}
           >
             {el + 1}
           </button>
@@ -24,7 +24,7 @@ const Pagination = ({
       )}
       <button
         onClick={page !== totalPages && nextPage}
-        className={`next-page ${page === totalPages && 'disabled'}`}
+        className={`next-page ${page === totalPages && "disabled"}`}
       >
         Next&raquo;
       </button>

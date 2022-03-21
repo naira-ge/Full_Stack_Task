@@ -1,13 +1,13 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
-import './styles.css';
+import "./styles.css";
   
 const Input = ({
   className,
   name,
   value,
-  placeholder = '',
-  type = 'input',
+  placeholder = "",
+  type = "text",
   required = true,
   label,
   error,

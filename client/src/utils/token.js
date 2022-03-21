@@ -1,11 +1,11 @@
 import {appKey} from 'config/constants/appKey';
 
-export const setToken = () => {
+export const getToken = () => {
   const token = localStorage.getItem(`${appKey}`);
   return token ? JSON.parse(token) : null;
 };
 
-export const getToken = (token) => {
+export const setToken = ( token ) => {
   token && localStorage.setItem(appKey, JSON.stringify(token));
 };
 

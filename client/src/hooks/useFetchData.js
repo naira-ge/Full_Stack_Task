@@ -1,4 +1,4 @@
-import { useState,useCallback } from 'react';
+import { useState,useCallback, useEffect } from 'react';
 
 import { getToken } from 'utils/token';
 
@@ -10,40 +10,49 @@ const useFetchData = (
   const token = getToken();
 
   const [data, setData] = useState(initialData);
-  const [hasError, setHasError] = useState(false);
-  const [ isLoading,setIsLoading ] = useState( false );
+  const [hasError, setHasError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   
-  const fetchData = useCallback(async (url, method = GET, data) => {
+  const fetchData = useCallback(async (url, method = GET, body) => {
     if (!url) return;
     setIsLoading(true);
-    hasError && setHasError( false );
+    hasError && setHasError(null);
     
     try {
       const response = await fetch( url,{
         method: method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': token,
+          'Authorization': `${token}`,
         },
-        body: JSON.stringify( data ),
+        body: JSON.stringify(body),
       } );
 
       const responseData = await response.json();
+      console.log('responseData', responseData);
     
       if( response.ok ) {
         setData( responseData );
+      } else {
+        setHasError(responseData.error)
       }
       
     } catch( error ) {
-      setData( initialData );
-      setHasError( true );
-
+      setData(initialData);
+      setHasError("Something went wrong. Try again.");
     } finally {
-      setIsLoading( false );
+      setIsLoading(false);
     }
-    
-  },[hasError, initialData] );
+  },[hasError, initialData, token] );
+  
+  useEffect( () => {
+    let isMounted = true;
 
+    return () => {
+      isMounted = false;
+    }
+  },[fetchData]);
+  
   return { data, fetchData, isLoading, setData, hasError };
 };
 

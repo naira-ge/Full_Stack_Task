@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define( "api_users",{
+  const Users = sequelize.define("Users",{
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Users.associate = (models) => {
-  //   Users.hasMany(models.Likes, {
+  //   Users.hasMany(models.Students, {
   //     onDelete: "cascade",
   //   });
   // };
