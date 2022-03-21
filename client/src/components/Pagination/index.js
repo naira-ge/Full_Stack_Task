@@ -23,7 +23,7 @@ const Pagination = ({
         <button className="page"> 0 </button>
       )}
       <button
-        onClick={page !== totalPages && nextPage}
+        onClick={page !== totalPages ? nextPage : () => {}}
         className={`next-page ${page === totalPages && "disabled"}`}
       >
         Next&raquo;

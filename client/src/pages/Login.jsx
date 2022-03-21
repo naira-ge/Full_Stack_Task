@@ -40,14 +40,12 @@ const LogIn = () => {
     
     if (username.value && password.value) {
       console.log( username,password,remember );
-      const rememberMe = remember?.value;
 
       await fetchLogin(`${appUrl}/auth/login`, POST, {password: `${password.value}`, username: `${username.value}`});
-      await console.log( data );
       
       if(data && !hasError) {
-        await setToken(data?.token);
-        // await navigate("/students");
+        await setToken(data?.token, remember?.value);
+        await navigate("/students");
       } else {
         setErrorMessage(hasError || "Something went wrong. Try again.");
       }

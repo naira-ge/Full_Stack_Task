@@ -16,17 +16,17 @@ const useFetchData = (
   const fetchData = useCallback(async (url, method = GET, body) => {
     if (!url) return;
     setIsLoading(true);
-    hasError && setHasError(null);
+    hasError && setHasError( null );
     
     try {
-      const response = await fetch( url,{
+      const response = await fetch(url, {
         method: method,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `${token}`,
         },
         body: JSON.stringify(body),
-      } );
+      });
 
       const responseData = await response.json();
       console.log('responseData', responseData);
@@ -34,9 +34,8 @@ const useFetchData = (
       if( response.ok ) {
         setData( responseData );
       } else {
-        setHasError(responseData.error)
+        responseData?.error && setHasError(responseData.error)
       }
-      
     } catch( error ) {
       setData(initialData);
       setHasError("Something went wrong. Try again.");

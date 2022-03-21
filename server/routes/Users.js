@@ -4,6 +4,7 @@ const { Users } = require( "../models" );
 const bcrypt = require("bcrypt");
 const uid = require("../utils/uid");
 const { sign } = require("jsonwebtoken");
+const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.post("/", async (req, res) => {
   const {id, username, password } = req.body;
@@ -39,6 +40,10 @@ router.post("/login", async (req, res) => {
     res.status(200).json({ token: accessToken, username: username, id: user.id });
   })
   .catch(err => res.status(404).json({error: "Username Or Password Incorrect"}));
+});
+
+router.get("/auth", validateToken, (req, res) => {
+  res.json(req.user);
 });
 
 module.exports = router;

@@ -26,7 +26,7 @@
 }
 
 .next-page {
-  margin-left: var(--margin);
+  margin-left: calc(var(--margin) * 2);
   width: 25px;
   height: 20px;
 }

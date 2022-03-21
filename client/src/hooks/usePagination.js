@@ -18,7 +18,7 @@ const usePagination = ({ contentPerPage, count }) => {
       return state - 1;
     });
   };
-
+  
   const setPageSafe = (num) => {
     if (num > pageCount) {
       setPage(pageCount);

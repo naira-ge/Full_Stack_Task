@@ -45,7 +45,7 @@ const Students = () => {
         <div className="wrapper-group">
           <ul>
             {isLoading && <p className="info">Loading...</p>}
-            {hasError && <p className="info">Something went wrong, try again.</p>}
+            {hasError && <p className="info">{hasError} || 'Something went wrong, try again.'</p>}
             {(data?.content && data?.content?.length === 0) ?
               <p className="info">No students to show.</p> :
               data?.content?.map( ( { id,user_id,name,group } ) => (

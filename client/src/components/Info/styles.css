@@ -33,7 +33,7 @@
   text-transform: capitalize;
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 764px){
   .group-item {
     padding: calc(var(--padding) * 3) calc(var(--padding) * 4);
   }

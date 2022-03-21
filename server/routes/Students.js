@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { Students } = require('../models');
+const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get('/', async (req, res) => {
+router.get('/', validateToken, async (req, res) => {
   const pageAsNumber = Number.parseInt(req.query.page);
   const sizeAsNumber = Number.parseInt(req.query.size);
   
@@ -32,7 +33,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', validateToken, async (req, res) => {
   const student = req.body;
   await Students.create( student );
   res.status(200).json(student);

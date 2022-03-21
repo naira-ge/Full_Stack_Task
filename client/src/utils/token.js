@@ -1,14 +1,25 @@
 import {appKey} from 'config/constants/appKey';
 
+
 export const getToken = () => {
-  const token = localStorage.getItem(`${appKey}`);
-  return token ? JSON.parse(token) : null;
+  const tokenLocalStorage = localStorage.getItem( `${appKey}` );
+  const tokenSessionStorage = sessionStorage.getItem( `${appKey}` );
+
+  return tokenLocalStorage ? JSON.parse( tokenLocalStorage ) : (
+    tokenSessionStorage ? JSON.parse( tokenSessionStorage ) : null
+    );
 };
 
-export const setToken = ( token ) => {
-  token && localStorage.setItem(appKey, JSON.stringify(token));
+export const setToken = (token, remember=false) => {
+  if (token) {
+    if(remember) {
+      localStorage.setItem(appKey,JSON.stringify( token ));
+    }
+    sessionStorage.setItem( appKey,JSON.stringify( token ));
+  };
 };
 
 export const removeToken = () => {
   localStorage.removeItem(appKey);
+  sessionStorage.removeItem(appKey);
 }
