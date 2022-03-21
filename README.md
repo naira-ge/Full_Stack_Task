@@ -16,6 +16,3 @@ Use this credentials for login the app.
 #### username: DenSmith, 
 #### password: password1523 
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
