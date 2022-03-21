@@ -1,5 +1,5 @@
 # Full Stack Task
-App have two parts frontend and backend.
+App has two parts frontend and backend.
 
 ### Frontend app use React.js and backend app use Express.js, Sequelize ORM
 ### Available Scripts
